@@ -1,0 +1,73 @@
+
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <br>
+          <div class="card card-style" style="border-radius: 15px;">
+            <div class="card-body p-5">
+<%= form_with model: @album do |form| %>
+  <div class="field form-outline mb-4">
+    <%= form.label :title %><br>
+    <%= form.text_field :title  ,class:"form-control form-control-lg",autocomplete: "off"%>
+
+    <% @album.errors.full_messages_for(:title).each do |message| %>
+      <div style="color:red;  font-style: italic;" ><%= message %></div>
+    <% end %>
+
+
+  </div>
+
+  <div class="field form-outline mb-4">
+    <%= form.label :Description %><br>
+    <%= form.text_area :description  ,class:"form-control form-control-lg",autocomplete: "off"%>
+
+    <% @album.errors.full_messages_for(:description).each do |message| %>
+      <div style="color:red;  font-style: italic;" ><%= message %></div>
+    <% end %>
+
+  </div>
+
+<div class="field form-outline mb-4">
+    <%= form.label :cover_photo %><br>
+    <%= form.file_field :cover_picture  ,class:"form-control form-control-lg" %>
+
+     <% @album.errors.full_messages_for(:cover_picture).each do |message| %>
+      <div style="color:red;  font-style: italic;" ><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="field form-outline mb-4">
+    <%= form.label :"Images (multiple)" %><br>
+    <%= form.file_field :images,multiple: true  ,class:"form-control form-control-lg" %>
+
+     <% @album.errors.full_messages_for(:images).each do |message| %>
+      <div style="color:red;  font-style: italic;" ><%= message %></div>
+    <% end %>
+  </div>
+
+   <div class="field form-outline mb-4">
+    <%= form.label :"Tags" %><br>
+    <%= form.text_field :tags_method ,class:"form-control form-control-lg",autocomplete: "off"%>
+  </div>
+
+  <div class="field form-outline mb-4">
+    <%= form.label :Publish %>
+    <%= form.check_box :publish %>
+  </div>
+
+  <div>
+    <%= form.number_field :user_id,id: :album_user_id ,value:current_user.id ,type: :hidden %>
+  </div>
+
+
+  <div>
+    <%= form.submit "Create", class:"btn btn-primary"%>   <%= link_to "Back", albums_path,class:"btn btn-secondary"%>
+  </div>
+<% end %>
+
+ </div>
+          </div>
+        </div>
+      </div>
+    </div>
+

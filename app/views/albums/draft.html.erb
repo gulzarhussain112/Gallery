@@ -1,0 +1,52 @@
+
+    <h1 class="p-1">Drafts Albums <small class="pull-right"> <%= link_to "Add New Album", new_album_path, class: "btn btn-primary" %>
+    </small>
+    </h1>
+    <br>
+    <div class="container-fluid">
+    <div class="row">
+    <hr class="hr">
+            <% @albums.each do |album| %>
+          
+              <div class="col-md-4 col-sm-12">
+                <div class="card cardShadow">
+                <div class="card-header ">
+            </div>
+                <div class="card-body">
+                <%= link_to album do %>
+                <% if album.cover_picture.attached? %>
+                <div style="width:300px; height:200px">
+                  <%= image_tag(album.cover_picture, class: "card-top-img img-fluid",style: "width:100%; height:100%") %>
+                  </div>
+                <% end %>
+                </div>
+                <% end %>
+                  <div class="card-footer text-center" >
+                  <p><strong>Album Title: </strong><span class="text-muted"><%= album.title%></span></p>
+                    <p><strong>tags : </strong><span class="text-muted"><%= album.tags_method%></span></p>
+          <p><strong>Created On: </strong><span class="text-muted"><%= album.created_at.to_s.split(' ')[0] %></span></p>
+          <p><strong>Last Updated: </strong><span class="text-muted"><%= album.updated_at.to_s.split(' ')[0] %></span></p>
+            </div>
+    <div class="card-footer">
+    <% if user_signed_in?  %>
+      <small class="pull-left" style="display:inline">  <%= link_to 'edit',edit_album_path(album.id),class: "btn btn-primary "%></small>
+        <h5  class="p-1 text-center" style="display:inline"> <%= link_to 'show',album_path(album.id),class: "btn btn-primary "%> </h5>
+      <small class="pull-right" style="display:inline">  <%= link_to 'delete',album_path(album.id),method: :delete, data: {confirm: "are you sure?"} ,class: "btn btn-danger pull-right"  %></small>
+          
+    <% end  %>
+      
+        </div>
+
+        
+                </div>
+                <br>
+              </div>
+
+              
+      
+
+              <% end %>
+            </div>
+    </div>
+
+

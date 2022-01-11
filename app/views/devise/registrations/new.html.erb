@@ -1,0 +1,52 @@
+
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <br>
+          <div class="card card-style" style="border-radius: 15px;">
+          
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field form-outline mb-4">
+    <%= f.label :Name ,class:"form-label"%><br />
+    <%= f.text_field :name ,autofocus: true, autocomplete: "off" ,class:"form-control form-control-lg"%>
+  </div>
+
+  <div class="field form-outline mb-4">
+    <%= f.label :email ,class:"form-label"%><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "off" ,class:"form-control form-control-lg"%>
+  </div>
+
+
+  <div class="field form-outline mb-4">
+    <%= f.label :password,class:"form-label" %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" ,class:"form-control form-control-lg" %>
+  </div>
+
+  <div class="field form-outline mb-4">
+    <%= f.label :password_confirmation ,class:"form-label"%><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" ,class:"form-control form-control-lg"%>
+  </div>
+<br>
+  <div class="actions">
+    <%= f.submit "Sign up",class:"btn btn-primary" %>
+  </div>
+<% end %>
+
+<p class="text-center text-muted mt-5 mb-0">Have already an account? <%= render "devise/shared/links" %></p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
