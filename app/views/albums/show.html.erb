@@ -26,8 +26,8 @@
                      <div class="card-body">
                      <%= link_to do %>
                      <% if @album.images.attached? %>
-                        <div style="width:300px; height:200px">
-                     <%= image_tag(@album.images[image],class: "card-top-img img-fluid",style: "width:100%; height:100%") %>
+                        <div style="width:300px; height:200px; text-align:center" class= "card-top-img img-fluid">
+                     <%= image_tag(@album.images[image],style: "width:100%; height:100%") %>
                   </div>
                      <% end %>
                      </div>
