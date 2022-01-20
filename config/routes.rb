@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  root "home#index"
+  devise_for :users
   get 'home/index'
   get 'home/show'
-  devise_for :users
-  root "home#index"
   get 'albums/draft'
   resources :albums 
   delete "attachments/:id/purge" , to: "attachments#purge" ,as: "purge_attachment"
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :home do
     collection do
-      match 'search' => 'home#search', via: [:get, :post], as: :search
+      match 'search', to: 'home#search', via: [:get, :post], as: :search
     end
   end
   

@@ -13,6 +13,7 @@ class AlbumsController < ApplicationController
 
     def new
         @album=Album.new
+        @formSubmitBtn="Create"
     end
 
     def create
@@ -30,6 +31,7 @@ class AlbumsController < ApplicationController
     end
 
     def edit
+        @formSubmitBtn="Update"
         @album=Album.find(params[:id])
     end
 

@@ -29,7 +29,7 @@
 
 <div class="field form-outline mb-4">
     <%= form.label :cover_photo %><br>
-    <%= form.file_field :cover_picture  ,class:"form-control form-control-lg" %>
+    <%= form.file_field :cover_picture  , accept: "image/jpeg, image/jpg,  image/png" ,class:"form-control form-control-lg" %>
 
      <% @album.errors.full_messages_for(:cover_picture).each do |message| %>
       <div style="color:red;  font-style: italic;" ><%= message %></div>
@@ -38,7 +38,7 @@
 
   <div class="field form-outline mb-4">
     <%= form.label :"Images (multiple)" %><br>
-    <%= form.file_field :images,multiple: true  ,class:"form-control form-control-lg" %>
+    <%= form.file_field :images,multiple: true  ,accept: "image/jpeg, image/jpg,  image/png" ,class:"form-control form-control-lg" %>
 
      <% @album.errors.full_messages_for(:images).each do |message| %>
       <div style="color:red;  font-style: italic;" ><%= message %></div>
@@ -61,7 +61,7 @@
 
 
   <div>
-    <%= form.submit "Create", class:"btn btn-primary"%>   <%= link_to "Back", albums_path,class:"btn btn-secondary"%>
+    <%= form.submit @formSubmitBtn, class:"btn btn-primary"%>   <%= link_to "Back", albums_path,class:"btn btn-secondary"%>
   </div>
 <% end %>
 
