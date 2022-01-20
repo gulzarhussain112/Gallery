@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:account_update, keys: [ :name])
     end
 
+    def authenticate_admin!
+      authenticate_user!
+      redirect_to :home, status: :forbidden unless current_user.admin?
+    end
 end

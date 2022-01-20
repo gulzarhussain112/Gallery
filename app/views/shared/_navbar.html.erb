@@ -28,9 +28,11 @@
         <li class="nav-item  <%=active_class?( edit_user_registration_path)%>">
           <%= link_to "Account", edit_user_registration_path,class:"nav-link"%>
         </li>
+     <%  if !current_user.admin? %>
         <li class="nav-item  <%=active_class?( albums_draft_path)%>">
           <%= link_to "Drafts", albums_draft_path,class:"nav-link"%>
         </li>
+        <% end  %>
         <li class="nav-item  <%=active_class?( destroy_user_session_path)%>">
           <%= link_to(("Sign Out" + content_tag(:span, " #{current_user.name}", :class=>"userName",:style => "font-weight: bold;")).html_safe,destroy_user_session_path,method: :delete,:class => "nav-link") %>
         </li>

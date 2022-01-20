@@ -1,9 +1,14 @@
 class AlbumsController < ApplicationController
     before_action :authenticate_user!, only: [:edit,:update,:delete,:destroy]
     before_action :correct_user, only: [:edit,:update,:delete,:destroy]
+    before_action :authenticate_admin!, only: [:admin] 
     def index
         if user_signed_in?
+            if current_user.admin?
+                redirect_to :action => 'admin'
+            else 
             @albums = Album.where("user_id = ?", current_user.id).published 
+            end
       
           else
             redirect_to '/home/index'
@@ -53,6 +58,11 @@ class AlbumsController < ApplicationController
       def draft
         @albums=Album.where("user_id = ?", current_user.id).unpublished
 
+      end
+
+      def admin
+        @users = User.all.where("id != ?", current_user.id)
+     
       end
     private
     def  album_params

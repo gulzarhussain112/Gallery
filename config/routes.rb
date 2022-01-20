@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/show'
   get 'albums/draft'
+  get 'albums/admin'
   resources :albums 
   delete "attachments/:id/purge" , to: "attachments#purge" ,as: "purge_attachment"
+  match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
 
 
   resources :home do
