@@ -1,7 +1,7 @@
 class AlbumsController < ApplicationController
     before_action :authenticate_user!, only: [:edit,:update,:delete,:destroy]
     before_action :correct_user, only: [:edit,:update,:delete,:destroy]
-    before_action :authenticate_admin!, only: [:admin] 
+    # before_action :authenticate_admin!, only: [:admin] 
     def index
         if user_signed_in?
             if current_user.admin?
