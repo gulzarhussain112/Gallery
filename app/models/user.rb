@@ -1,7 +1,12 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
+  def destroy
+    update_attributes(deactivated: true) unless deactivated
+end
+def active_for_authentication?
+  super && !deactivated
+end
   has_many :taggings
   has_many :tag,through: :taggings
   before_create { |user| user.name = user.name.capitalize}

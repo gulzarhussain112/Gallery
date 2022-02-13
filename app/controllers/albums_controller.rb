@@ -61,6 +61,7 @@ class AlbumsController < ApplicationController
       end
 
       def admin
+        @user=User.all
         @users = User.all.where("id != ?", current_user.id)
      
       end
