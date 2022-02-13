@@ -8,7 +8,7 @@
       <th scope="col">E-mail id</th>
        <th scope="col">Created On</th>
       <th scope="col">Action</th>
-       <th scope="col">Action</th>
+            <th scope="col">Action</th>
     
     </tr>
   </thead>
@@ -20,10 +20,21 @@
       <td><%= user.email %></td>
         <td><%= user.created_at.to_s.split(' ')[0]  %></td>
       <td><%= link_to "Delete User", admin_destroy_user_path(user), method: :delete, data: { confirm: "You sure?" } ,class:"btn btn-outline-danger btn-sm"%></td>
-      <td>
 
-      </td>
-    </tr>
+
+    <% if user.deactivated == false %>
+
+        <td><%= link_to 'Deactivate', deactivate_album_path(user), class: 'btn btn-danger',
+                method: :patch,
+                data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+
+        <td><%= link_to 'Activate', activate_album_path(user), class: 'btn btn-primary',
+                method: :patch,
+                data: { confirm: 'Are you sure?' } %></td>
+
+<% end %>
+</tr>
   <% end %>
   </tbody>
   

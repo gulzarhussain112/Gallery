@@ -65,9 +65,22 @@ class AlbumsController < ApplicationController
         @users = User.all.where("id != ?", current_user.id)
      
       end
+      def deactivate
+        @user = User.find(params[:id])
+        @user.update(deactivated: true)
+        redirect_to root_path
+      end
+      
+      def activate
+        @user = User.find(params[:id])
+
+        @user.update(deactivated: false)
+        redirect_to root_path
+      end
+
     private
     def  album_params
-        params.require(:album).permit(:title,:tags_id,:description,:publish,:cover_picture,:tags_method,:user_id,images:[])
+        params.permit(:title,:tags_id,:description,:publish,:cover_picture,:tags_method,:user_id,images:[])
     end
 
    def correct_user
