@@ -67,14 +67,14 @@ class AlbumsController < ApplicationController
       end
       def deactivate
         @user = User.find(params[:id])
-        @user.update(deactivated: true)
+        @user.update(deactivated: "true")
         redirect_to root_path
       end
       
       def activate
         @user = User.find(params[:id])
 
-        @user.update(deactivated: false)
+        @user.update(deactivated: "false")
         redirect_to root_path
       end
 
