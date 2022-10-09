@@ -8,19 +8,13 @@ class HomeController < ApplicationController
     end
   end
   
-def search
-  if !user_signed_in?
-
-    index
-    render :index
-
+  def search
+    if !user_signed_in?
+      index
+      render :index
     else 
-
-    redirect_to '/albums'
-  end
-end
-
-  def show
+      redirect_to '/albums'
+    end
   end
 end
 

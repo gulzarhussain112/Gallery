@@ -12,23 +12,21 @@ class Album < ApplicationRecord
   has_one_attached :cover_picture
   has_many_attached :images
 
+  scope :published, -> {
+      where(:publish => true)
+  }
+  
+  scope :unpublished, -> {
+    where(:publish => false)
+  }
 
-    scope :published, -> {
-        where(:publish => true)
-      }
-   
-      scope :unpublished, -> {
-        where(:publish => false)
-      }
-
-
-      def tags_method=(names)
-        self.tags = names.split(',').map do |name|
-            Tag.where(name: name).first_or_create!
-        end
+  def tags_method=(names)
+    self.tags = names.split(',').map do |name|
+        Tag.where(name: name).first_or_create!
     end
+  end
 
-    def tags_method
-        tags.map(&:name).join(",")
-    end
+  def tags_method
+      tags.map(&:name).join(",")
+  end
 end
