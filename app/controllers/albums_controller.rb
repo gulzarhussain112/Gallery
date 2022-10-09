@@ -65,22 +65,24 @@ class AlbumsController < ApplicationController
         @users = User.all.where("id != ?", current_user.id)
      
       end
-      def deactivate
-        @user = User.find(params[:id])
-        @user.update(deactivated: "true")
-        redirect_to root_path
-      end
+      def toggle
+        @user = User.find_by_id(params[:id])
       
-      def activate
-        @user = User.find(params[:id])
-
-        @user.update(deactivated: "false")
-        redirect_to root_path
+        if @user != nil?
+          if @user.deactivated == false
+            	bool = true
+          else
+              bool = false
+          end
+          @user.update(deactivated: bool)
+        else
+          set_flash "Error, please try again"
+        end
       end
 
     private
     def  album_params
-        params.permit(:title,:tags_id,:description,:publish,:cover_picture,:tags_method,:user_id,images:[])
+       params.require(:album).permit(:title, :tags_id,:description,:publish,:cover_picture,:tags_method,:user_id,images:[])
     end
 
    def correct_user
@@ -88,5 +90,6 @@ class AlbumsController < ApplicationController
         redirect_to albums_path, danger: "You are not authorised to modify" if @album.nil?
     
       end
+
     
 end

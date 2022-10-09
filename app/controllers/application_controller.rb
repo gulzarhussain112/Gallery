@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
       authenticate_user!
       redirect_to :home, status: :forbidden unless current_user.admin?
     end
+
+    def admin_edit_user
+      render 'admin_edit_user'
+    end
 end

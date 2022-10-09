@@ -6,35 +6,31 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">E-mail id</th>
-       <th scope="col">Created On</th>
-      <th scope="col">Action</th>
-            <th scope="col">Action</th>
-    
+      <th scope="col">Created On</th>
+       <th scope="col">Album Created</th>
+      <th scope="col">Delete User</th>
+      <th scope="col">Deactivated</th>
     </tr>
   </thead>
-
   <tbody>
       <% @users.each do |user| %>
     <tr>
       <td><%= user.name %></td>
       <td><%= user.email %></td>
-        <td><%= user.created_at.to_s.split(' ')[0]  %></td>
-      <td><%= link_to "Delete User", admin_destroy_user_path(user), method: :delete, data: { confirm: "You sure?" } ,class:"btn btn-outline-danger btn-sm"%></td>
+        <td><%= user.created_at.strftime('%d-%m-%Y') %></td>
+        <% count = user.albums.count %>
+        <td><%= count %></td>
+      <td><%= link_to "Delete", admin_destroy_user_path(user), method: :delete, data: { confirm: "You sure?" } ,class:"btn btn-outline-danger btn-sm"%></td>
+      <td>
+      <%= check_box_tag 'deactivated', user.id, user.deactivated,
+      data: {
+        remote: true,
+        url: url_for(action: :toggle, id: user.id),
+        method: "POST"
+      } %>
 
-
-    <% if user.deactivated == false %>
-
-        <td><%= link_to 'Deactivate', deactivate_album_path(user), class: 'btn btn-danger',
-                method: :patch,
-                data: { confirm: 'Are you sure?' } %></td>
-        <% else %>
-
-        <td><%= link_to 'Activate', activate_album_path(user), class: 'btn btn-primary',
-                method: :patch,
-                data: { confirm: 'Are you sure?' } %></td>
-
-<% end %>
-</tr>
+      </td>
+    </tr>
   <% end %>
   </tbody>
   

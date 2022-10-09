@@ -5,11 +5,10 @@ Rails.application.routes.draw do
   get 'home/show'
   get 'albums/draft'
   get 'albums/admin' 
+  post 'albums/toggle' , to: 'albums#toggle'
   get 'users' , to: 'home#index'
-  resources :albums do 
-    member { patch :activate }
-    member { patch :deactivate }
-  end
+  resources :albums
+  get '/admin_edit_user', to: 'application#admin_edit_user'
 
   delete "attachments/:id/purge" , to: "attachments#purge" ,as: "purge_attachment"
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
